@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<info>
+	<id>lockpick</id>
+	<name>Lock pick</name>
+	<summary>Transaction locking debuging</summary>
+	<licence>AGPL</licence>
+	<author>Robin Appelman</author>
+	<version>0.1.0</version>
+	<types>
+		<filesystem/>
+		<logging/>
+	</types>
+	<namespace>LockPick</namespace>
+
+	<dependencies>
+		<nextcloud min-version="24" max-version="25"/>
+	</dependencies>
+
+	<commands>
+		<command>OCA\LockPick\Command\Show</command>
+		<command>OCA\LockPick\Command\ListCommand</command>
+	</commands>
+</info>
