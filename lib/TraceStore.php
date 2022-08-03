@@ -101,4 +101,10 @@ class TraceStore {
 			return null;
 		}
 	}
+
+	public function clear(): void {
+		$query = $this->connection->getQueryBuilder();
+		$query->delete('lockpick_traces');
+		$query->executeStatement();
+	}
 }

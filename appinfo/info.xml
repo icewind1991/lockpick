@@ -18,6 +18,7 @@
 
 	<commands>
 		<command>OCA\LockPick\Command\Show</command>
+		<command>OCA\LockPick\Command\Clear</command>
 		<command>OCA\LockPick\Command\ListCommand</command>
 	</commands>
 </info>
