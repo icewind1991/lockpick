@@ -59,3 +59,4 @@ shared lock from
 
 - Currently, it only helps with conflicts from locks coming from a single request, conflicts between multiple requests are not covered. 
 - The mapping between locks and unlocks isn't great, in cases with complex lock-unlock patterns the result might not be accurate.
+- Currently only work with memcache/redis based locking.

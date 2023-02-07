@@ -41,7 +41,7 @@ class Application extends App implements IBootstrap {
 	public function __construct(array $urlParams = []) {
 		parent::__construct('lockpick', $urlParams);
 
-		// we are overly aggressive and rude in how we register out locking provider to ensure it gets picked up early
+		// we are overly aggressive and rude in how we register our locking provider to ensure it gets picked up early
 		\OC::$server->registerService(ILockingProvider::class, function (ContainerInterface $c) {
 			$config = $c->get(IConfig::class);
 			$ttl = $config->getSystemValue('filelocking.ttl', 3600);
