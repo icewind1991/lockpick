@@ -31,6 +31,7 @@ use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
+use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\ICacheFactory;
 use OCP\IConfig;
 use OCP\IRequest;
@@ -49,7 +50,15 @@ class Application extends App implements IBootstrap {
 				/** @var \OC\Memcache\Factory $memcacheFactory */
 				$memcacheFactory = $c->get(ICacheFactory::class);
 				$memcache = $memcacheFactory->createLocking('lock');
-				$inner = new MemcacheLockingProvider($memcache, $ttl);
+
+				// hacky compatibility
+				$class = new \ReflectionClass(MemcacheLockingProvider::class);
+				if ($class->getConstructor()->getNumberOfParameters() === 2) {
+					$inner = new MemcacheLockingProvider($memcache, $ttl);
+				} else {
+					$timeFactory = $c->get(ITimeFactory::class);
+					$inner = new MemcacheLockingProvider($memcache, $timeFactory, $ttl);
+				}
 				return new DebugLockingProvider($inner, $c->get(IRequest::class), $c->get(TraceStore::class));
 			}
 			return new NoopLockingProvider();
